@@ -33,6 +33,7 @@ class Ship:
         self.arsenal.update_arsenal()
 
     def _update_ship_movement(self):
+        """Updates the ship's movement on the screen"""
         temp_speed = self.settings.ship_speed
         
         if self.moving_up and self.rect.top > self.boundaries.top:
