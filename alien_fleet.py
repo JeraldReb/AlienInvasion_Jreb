@@ -104,3 +104,10 @@ class AlienFleet:
         """Checks collisions between alien fleet and edges"""
         return pygame.sprite.groupcollide(self.fleet, other_group, True, True)
 
+    def check_fleet_right(self):
+        """Checks for collisions with the right edge of the screen"""
+        alien: Alien
+        for alien in self.fleet:
+            if alien.rect.right >= self.settings.screen_w:
+                return True
+        return False
