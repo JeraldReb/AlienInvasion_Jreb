@@ -26,14 +26,21 @@ class AlienFleet:
         screen_h = self.settings.screen_h
         screen_w = self.settings.screen_w
 
-        fleet_h, fleet_w = self.calculate_fleet_size(alien_h, screen_h, alien_w, screen_w)
-        
+        fleet_h, fleet_w = self.calculate_fleet_size(alien_h, screen_h, alien_w, screen_w)    
+        y_offset, x_offset = self.calculate_offsets(alien_h, alien_w, screen_h, fleet_h, fleet_w)
+        self._create_rectangle_fleet(alien_h, alien_w, fleet_h, fleet_w, y_offset, x_offset)
+
+    def calculate_offsets(self, alien_h, alien_w, screen_h, fleet_h, fleet_w):
+        """Calculates alien spacing within the fleet"""
         half_screen = self.settings.screen_w//2
         fleet_vertical_space = fleet_h * alien_h
         fleet_horizontal_space = fleet_w * alien_h
         y_offset = int((screen_h - fleet_vertical_space)//2)
         x_offset = int((half_screen - fleet_horizontal_space)//2)
+        return y_offset, x_offset
 
+    def _create_rectangle_fleet(self, alien_h, alien_w, fleet_h, fleet_w, y_offset, x_offset):
+        """Creates a rectangular formation of alien ships"""
         for col in range(fleet_w):
             for row in range(fleet_h):
                 current_y = alien_h * row + y_offset
