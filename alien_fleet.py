@@ -113,4 +113,5 @@ class AlienFleet:
         return False
 
     def check_destroyed_status(self):
+        """Checks if all aliens are destroyed"""
         return not self.fleet
