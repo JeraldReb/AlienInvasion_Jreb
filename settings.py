@@ -31,3 +31,12 @@ class Settings:
         self.alien_h = 30
         self.fleet_direction = 1
         self.fleet_drop_speed = 40
+
+        self.button_w = 200
+        self.button_h = 50
+        self.button_color = (125, 20, 137)
+
+        self.text_color = (255, 255, 255)
+        self.button_font_size = 48
+        self.HUD_font_size = 20
+        self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
