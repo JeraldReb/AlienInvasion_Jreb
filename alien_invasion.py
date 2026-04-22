@@ -10,7 +10,6 @@ from settings import Settings
 from game_stats import GameStats
 from ship import Ship
 from arsenal import Arsenal
-# from alien import Alien
 from alien_fleet import AlienFleet
 from time import sleep
 from button import Button
@@ -22,6 +21,7 @@ class AlienInvasion:
         """Initializes the game"""
         pygame.init()
         self.settings = Settings()
+        self.settings.initialize_dynamic_settings()
         self.game_stats = GameStats(self.settings.starting_ship_count)
 
         self.screen = pygame.display.set_mode((self.settings.screen_w,self.settings.screen_h))
@@ -41,7 +41,7 @@ class AlienInvasion:
         self.impact.set_volume(0.5)
 
         self.ship = Ship(self, Arsenal(self))
-        self.alien_fleet = AlienFleet(self, )
+        self.alien_fleet = AlienFleet(self)
         self.alien_fleet.create_fleet()
         
         self.play_button = Button(self, 'Play')
@@ -77,6 +77,7 @@ class AlienInvasion:
 
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
+            self.settings.increase_difficulty()
 
     def _check_game_status(self):
         """Checks the status of the game"""
@@ -95,7 +96,7 @@ class AlienInvasion:
 
     def restart_game(self):
         """Restarts the game"""
-        # setting up dynamic settings
+        self.settings.initialize_dynamic_settings()
         # reset game stats
         # update HUD scores
         self._reset_level()
