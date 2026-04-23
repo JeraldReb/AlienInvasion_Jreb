@@ -1,8 +1,8 @@
-"""Lab 13/Alien Invasion part 2
+"""Lab 14/Alien Invasion part 3
 Jerald Reb
 Continuing to create Alien Invasion game
-Starter code from Unit 12 and 13 resources
-April 19, 2026"""
+Starter code from Unit 12, 13, and 14 resources
+April 21, 2026"""
 
 import sys
 import pygame
