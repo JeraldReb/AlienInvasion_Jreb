@@ -8,6 +8,7 @@ class GameStats:
     """Creates a class to house volatile game stats"""
 
     def __init__(self, game: 'AlienInvasion'):
+        """Initializes the game stats"""
         self.game = game
         self.settings = game.settings
         self.max_score = 0
@@ -15,8 +16,9 @@ class GameStats:
         self.reset_stats()
 
     def init_saved_scores(self):
+        """Retrieves saved scores"""
         self.path = self.settings.scores_file
-        if self.path.exists and self.path.stat.__sizeof__() > 80:
+        if self.path.exists and self.path.stat.__sizeof__() > 20:
             contents = self.path.read_text()
             scores = json.loads(contents)
             self.hi_score = scores.get('hi_score', 0)
@@ -25,6 +27,7 @@ class GameStats:
             self.save_scores()
 
     def save_scores(self):
+        """Saves scores to file"""
         scores = {'hi_score': self.hi_score}
         contents = json.dumps(scores, indent=4)
         try:
@@ -34,11 +37,13 @@ class GameStats:
 
 
     def reset_stats(self):
+        """Resets the game stats"""
         self.ships_left = self.settings.starting_ship_count
         self.score = 0
         self.level = 1
 
     def update(self, collisions):
+        """Updates the scores"""
         # update score
         self._update_score(collisions)
 
@@ -49,20 +54,24 @@ class GameStats:
         self._update_hi_score()
 
     def _update_max_score(self):
+        """Updates the max score"""
         if self.score > self.max_score:
             self.max_score = self.score
         # print(f'Max: {self.max_score}')
 
     def _update_hi_score(self):
+        """Updates the hi score"""
         if self.score > self.hi_score:
             self.hi_score = self.score
         # print(f'Hi: {self.hi_score}')
 
     def _update_score(self, collisions):
+        """Updates the score"""
         for alien in collisions.values():
             self.score += self.settings.alien_points
         # print(f'Score: {self.score}')
 
     def update_level(self):
+        """Updates the level"""
         self.level += 1
         # print(self.level)
